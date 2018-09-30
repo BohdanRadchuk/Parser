@@ -31,4 +31,30 @@ public class Person {
     public String getEducation() {
         return education;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCash(BigDecimal cash) {
+        this.cash = cash;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", cash=" + cash +
+                ", education='" + education + '\'' +
+                '}';
+    }
 }

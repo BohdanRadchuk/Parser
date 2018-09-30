@@ -1,3 +1,5 @@
+package service.xml;
+
 import entity.Person;
 import entity.PersonBuilder;
 import org.w3c.dom.Document;
@@ -14,6 +16,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class XmlWriter {
     private static final String CATALOG = "catalog";
@@ -25,7 +28,7 @@ public class XmlWriter {
     private static final String CASH = "cash";
     private static final String EDUCATION = "education";
 
-    public void createXmlFile() {
+    public void createXmlFile(List<Person> personList, String fileName) {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -33,52 +36,44 @@ public class XmlWriter {
 
             Element rootElement = doc.createElement(CATALOG);
             doc.appendChild(rootElement);
-
             Element notebook = doc.createElement(NOTEBOOK);
             rootElement.appendChild(notebook);
 
-            ArrayList<Person> persons = createPersonsList();
-
-            for (int i = 0; i< persons.size(); i++) {
-
+            for (int i = 0; i < personList.size(); i++) {
                 Element person = doc.createElement(PERSON);
                 notebook.appendChild(person);
-                person.setAttribute(ID, String.valueOf(i+1));
+                person.setAttribute(ID, String.valueOf(i + 1));
 
                 Element name = doc.createElement(NAME);
-                name.appendChild(doc.createTextNode(persons.get(i).getName()));
+                name.appendChild(doc.createTextNode(personList.get(i).getName()));
                 person.appendChild(name);
                 Element address = doc.createElement(ADDRESS);
-                address.appendChild(doc.createTextNode(persons.get(i).getAddress()));
+                address.appendChild(doc.createTextNode(personList.get(i).getAddress()));
                 person.appendChild(address);
-
                 Element cash = doc.createElement(CASH);
-                cash.appendChild(doc.createTextNode(String.valueOf(persons.get(i).getCash())));
+                cash.appendChild(doc.createTextNode(String.valueOf(personList.get(i).getCash())));
                 person.appendChild(cash);
-
-                Element education = doc.createElement(EDUCATION);
-                education.appendChild(doc.createTextNode(persons.get(i).getEducation()));
-                person.appendChild(education);
+                if (personList.get(i).getEducation() != null) {
+                    Element education = doc.createElement(EDUCATION);
+                    education.appendChild(doc.createTextNode(personList.get(i).getEducation()));
+                    person.appendChild(education);
+                }
             }
-
-            writeToFile(doc);
-
-
+            writeToFile(doc, fileName);
         } catch (ParserConfigurationException | TransformerException e) {
             e.printStackTrace();
         }
-
     }
 
-    private static void writeToFile(Document doc) throws TransformerException {
+    private void writeToFile(Document doc, String fileName) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(new File("d:\\notebook.xml"));
+        StreamResult result = new StreamResult(new File(fileName));
         transformer.transform(source, result);
     }
 
-    private static ArrayList<Person> createPersonsList() {
+    public ArrayList<Person> createPersonsList() {
         ArrayList<Person> persons = new ArrayList<>();
 
         persons.add(new PersonBuilder().setName("John")
@@ -91,6 +86,18 @@ public class XmlWriter {
                 .setAddress("harkisvska str 22")
                 .setCash(new BigDecimal(2000))
                 .setEducation("National Academy")
+                .createPerson());
+        persons.add(new PersonBuilder()
+                .setName("AAasdadsaa")
+                .setAddress("harka str 22")
+                .setCash(new BigDecimal(20000))
+                .setEducation("National GFD Academy")
+                .createPerson());
+        persons.add(new PersonBuilder()
+                .setName("Dgasdas")
+                .setAddress("Jonkd str 22")
+                .setCash(new BigDecimal(10000))
+                .setEducation("National Asd Academy")
                 .createPerson());
         return persons;
     }
