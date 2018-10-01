@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonSorter {
-    public List<Person> choosePersonsWithMoreCash (List<Person> persons, int cahs){
+    public List<Person> choosePersonsWithMoreCash(List<Person> persons, int cahs) {
         ArrayList<Person> reachPersons = new ArrayList<>();
         for (Person person : persons) {
             int comparingResult = person.getCash().compareTo(new BigDecimal(cahs));

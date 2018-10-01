@@ -17,6 +17,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class XmlWriter {
     private static final String CATALOG = "catalog";
@@ -72,35 +73,4 @@ public class XmlWriter {
         StreamResult result = new StreamResult(new File(fileName));
         transformer.transform(source, result);
     }
-
-    public ArrayList<Person> createPersonsList() {
-        ArrayList<Person> persons = new ArrayList<>();
-
-        persons.add(new PersonBuilder().setName("John")
-                .setAddress("glib str 29")
-                .setCash(new BigDecimal(100000))
-                .setEducation("National University")
-                .createPerson());
-        persons.add(new PersonBuilder()
-                .setName("AAaa")
-                .setAddress("harkisvska str 22")
-                .setCash(new BigDecimal(2000))
-                .setEducation("National Academy")
-                .createPerson());
-        persons.add(new PersonBuilder()
-                .setName("AAasdadsaa")
-                .setAddress("harka str 22")
-                .setCash(new BigDecimal(20000))
-                .setEducation("National GFD Academy")
-                .createPerson());
-        persons.add(new PersonBuilder()
-                .setName("Dgasdas")
-                .setAddress("Jonkd str 22")
-                .setCash(new BigDecimal(10000))
-                .setEducation("National Asd Academy")
-                .createPerson());
-        return persons;
-    }
-
-
 }

@@ -2,7 +2,7 @@ package entity;
 
 import java.util.Objects;
 
-public class ExchangeCourse {
+public class Currency {
     private String r030;
     private String txt;
     private String rate;
@@ -10,10 +10,10 @@ public class ExchangeCourse {
     private String exchangedate;
 
 
-    public ExchangeCourse() {
+    public Currency() {
     }
 
-    public ExchangeCourse(String r030, String txt, String rate, String cc, String exchangedate) {
+    public Currency(String r030, String txt, String rate, String cc, String exchangedate) {
         this.r030 = r030;
         this.txt = txt;
         this.rate = rate;
@@ -45,7 +45,7 @@ public class ExchangeCourse {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ExchangeCourse that = (ExchangeCourse) o;
+        Currency that = (Currency) o;
         return Objects.equals(r030, that.r030) &&
                 Objects.equals(txt, that.txt) &&
                 Objects.equals(rate, that.rate) &&
@@ -61,7 +61,7 @@ public class ExchangeCourse {
 
     @Override
     public String toString() {
-        return "Currency{" +
+        return "{" +
                 "r030='" + r030 + '\'' +
                 ", txt='" + txt + '\'' +
                 ", rate='" + rate + '\'' +

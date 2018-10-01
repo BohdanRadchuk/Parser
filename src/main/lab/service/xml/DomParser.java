@@ -17,11 +17,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DomParser implements Parser{
+public class DomParser implements Parser {
     @Override
     public List<Person> parse(String filePath) {
         File file = new File(filePath);
-        System.out.println("DOM");
         ArrayList<Person> persons = new ArrayList<>();
         try {
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();

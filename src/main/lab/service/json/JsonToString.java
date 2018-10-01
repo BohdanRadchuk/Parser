@@ -1,18 +1,15 @@
 package service.json;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Scanner;
 
 public class JsonToString {
 
-    public String readStringFromJson(String urlString) {
+    public String readJsonFromURL(String urlString) {
         StringBuilder stringBuilder = new StringBuilder();
         URL url = null;
-
         try {
             url = new URL(urlString);
         } catch (MalformedURLException e) {
@@ -26,7 +23,21 @@ public class JsonToString {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return stringBuilder.toString();
+    }
+
+    public String readJsonFromFile(String filepath) {
+        File file = new File(filepath);
+        String fileData = "";
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                fileData = sc.nextLine();
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return fileData;
     }
 }
